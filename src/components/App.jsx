@@ -4,8 +4,6 @@ import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Section } from './Section/Section';
 import { Notification } from './Notification/Notification';
 
-const buttonOptions = ['Good', 'Neutral', 'Bad'];
-
 export class App extends Component {
   state = {
     good: 0,
@@ -13,23 +11,11 @@ export class App extends Component {
     bad: 0,
   };
 
-  handleFeedback = () => {
-    // console.log(3);
+  handleFeedback = option => {
     this.setState(prevState => ({
-      good: prevState.good + 1,
+      [option]: this.state[option] + 1,
     }));
   };
-  // handleBtnClick = e => {
-  //   this.setState(prevState => {
-  //     let newState = { ...prevState };
-  //     for (const key in newState) {
-  //       if (key === e.target.textContent) {
-  //         newState[key] += 1;
-  //       }
-  //     }
-  //     return newState;
-  //   });
-  // };
 
   countTotalFeedback = () => {
     const { good, neutral, bad } = this.state;
@@ -46,7 +32,7 @@ export class App extends Component {
       <>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={buttonOptions}
+            options={['good', 'neutral', 'bad']}
             onLeaveFeedback={this.handleFeedback}
           />
         </Section>
